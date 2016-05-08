@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <% if (vizualiziraj) { %>
 <?xml-stylesheet type="text/xsl" href="../eSLOG/vizualizacija.xslt"?>
 <% } %>
@@ -199,17 +200,6 @@
 			<NazivNaslovPodjetja>
 				<VrstaPartnerja>BY</VrstaPartnerja>
 				<NazivPartnerja>
-<<<<<<< HEAD
-					<NazivPartnerja1><%=user.FirstName + " " + user.LastName%></NazivPartnerja1>
-					<NazivPartnerja2><%=user.Company%></NazivPartnerja2>
-				</NazivPartnerja>
-				<Ulica>
-					<Ulica1><%=user.Address%></Ulica1>
-				</Ulica>
-				<Kraj><%=user.City%></Kraj>
-				<NazivDrzave><%=user.Country%></NazivDrzave>
-				<PostnaStevilka><%=user.PostalCode%></PostnaStevilka>
-=======
 					<NazivPartnerja1><%=uporabnik.FirstName + " " + uporabnik.LastName%></NazivPartnerja1>
 					<NazivPartnerja2><%=uporabnik.Company%></NazivPartnerja2>
 				</NazivPartnerja>
@@ -219,7 +209,6 @@
 				<Kraj><%=uporabnik.City%></Kraj>
 				<NazivDrzave><%=uporabnik.Country%></NazivDrzave>
 				<PostnaStevilka><%=uporabnik.PostalCode%></PostnaStevilka>
->>>>>>> prikaz-racuna
 				<KodaDrzave></KodaDrzave>
 			</NazivNaslovPodjetja>
 			
@@ -249,16 +238,6 @@
 			
 			<KontaktiPodjetja>
 				<KontaktnaOseba>
-<<<<<<< HEAD
-					<ImeOsebe><%=user.FirstName + " " + user.LastName + " (" + user.Email + ")"%></ImeOsebe>
-				</KontaktnaOseba>
-				<Komunikacije>
-					<StevilkaKomunikacije><%=user.Phone%></StevilkaKomunikacije>
-					<VrstaKomunikacije>TE</VrstaKomunikacije>
-				</Komunikacije>
-				<Komunikacije>
-					<StevilkaKomunikacije><%=user.Fax%></StevilkaKomunikacije>
-=======
 					<ImeOsebe><%=uporabnik.FirstName + " " + uporabnik.LastName + " (" + uporabnik.Email + ")"%></ImeOsebe>
 				</KontaktnaOseba>
 				<Komunikacije>
@@ -267,7 +246,6 @@
 				</Komunikacije>
 				<Komunikacije>
 					<StevilkaKomunikacije><%=uporabnik.Fax%></StevilkaKomunikacije>
->>>>>>> prikaz-racuna
 					<VrstaKomunikacije>FX</VrstaKomunikacije>
 				</Komunikacije>
 			</KontaktiPodjetja>
