@@ -134,7 +134,6 @@ var pesmiIzRacuna = function(racunId, callback) {
     WHERE InvoiceLine.InvoiceId = Invoice.InvoiceId AND Invoice.InvoiceId = " + racunId + ")",
     
     function(napaka, vrstice) {
-      // console.log(vrstice);
       if (napaka) {
         callback(false);
       }
@@ -149,12 +148,12 @@ var strankaIzRacuna = function(racunId, callback) {
     pb.all("SELECT Customer.* FROM Customer, Invoice \
             WHERE Customer.CustomerId = Invoice.CustomerId AND Invoice.InvoiceId = " + racunId,
     function(napaka, vrstice) {
-    if (napaka) {
-      callback(false);
-    }
-    else {
-      callback(vrstice[0]);
-    }
+      if (napaka) {
+        callback(false);
+      }
+      else {
+        callback(vrstice[0]);
+      }
   });
 }
 
