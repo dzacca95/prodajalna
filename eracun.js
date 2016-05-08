@@ -149,13 +149,42 @@ var strankaIzRacuna = function(racunId, callback) {
     pb.all("SELECT Customer.* FROM Customer, Invoice \
             WHERE Customer.CustomerId = Invoice.CustomerId AND Invoice.InvoiceId = " + racunId,
     function(napaka, vrstice) {
-      console.log(vrstice);
-    })
+    if (napaka) {
+      callback(false);
+    }
+    else {
+      callback(vrstice[0]);
+    }
+  });
 }
 
 // Izpis računa v HTML predstavitvi na podlagi podatkov iz baze
 streznik.post('/izpisiRacunBaza', function(zahteva, odgovor) {
-  odgovor.end();
+  
+  var form = new formidable.IncomingForm();
+  form.parse(zahteva, function (napaka, polja, datoteke) {
+    
+    strankaIzRacuna(polja.seznamRacunov, function(stranka) {
+      if (stranka == null) {
+        odgovor.send("Prišlo je do napake.");
+      }
+      else {
+        pesmiIzRacuna(polja.seznamRacunov, function(pesmi) {
+          if (pesmi == null) {
+            odgovor.send("Prišlo je do napake.");
+         }
+         else {
+           odgovor.setHeader("content-type", "text/xml");
+           odgovor.render("eslog", {
+            vizualiziraj: "html",
+            postavkeRacuna: pesmi,
+            uporabnik: stranka
+           });
+          }
+        });
+      }
+    });
+  });
 })
 
 // Izpis računa v HTML predstavitvi ali izvorni XML obliki
@@ -215,14 +244,9 @@ streznik.post('/prijava', function(zahteva, odgovor) {
     	  Address, City, State, Country, PostalCode, \
     	  Phone, Fax, Email, SupportRepId) \
         VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-      stmt.run(polja.FirstName, polja.LastName, polja.Company, polja.Address, polja.City, polja.State, polja.Country, polja.PostalCode,
-              polja.Phone, polja.Fax, polja.Email, 3); 
-      stmt.finalize();
     } catch (err) {
       napaka2 = true;
     }
-  
-    //odgovor.end();
     
     vrniStranke(function(napaka1, stranke) {
       vrniRacune(function(napaka2, racuni) {
